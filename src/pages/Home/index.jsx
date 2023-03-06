@@ -20,15 +20,17 @@ export function Home () {
     setStudents([...students, newStudent])
   }
 
+  // não se usa async direto no useEffect e sim criar uma função dentro dele
   useEffect(() => {
-    fetch('https://api.github.com/users/franzannakarolina')
-    .then(response => response.json())
-    .then(data => {
+    async function fetchData() {
+      const response = await fetch('https://api.github.com/users/franzannakarolina')
+      const data = await response.json()
       setUser({
         name: data.name,
         avatar: data.avatar_url
       })
-    })
+    }
+    fetchData()
   }, [])
 
   return (
