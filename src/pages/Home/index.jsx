@@ -5,6 +5,10 @@ import './styles.css';
 export function Home () {
   const [name, setName] = useState('')
   const [students, setStudents] = useState([]);
+  const [user, setUser] = useState({
+    name: '',
+    avatar: ''
+  });
 
   function handleAddStudent() {
     const newStudent = {
@@ -17,19 +21,23 @@ export function Home () {
   }
 
   useEffect(() => {
-    const studentsStorage = localStorage.getItem('students')
-    if(studentsStorage) {
-      setStudents(JSON.parse(studentsStorage))
-    }
-  }, [students, name])
+    fetch('https://api.github.com/users/franzannakarolina')
+    .then(response => response.json())
+    .then(data => {
+      setUser({
+        name: data.name,
+        avatar: data.avatar_url
+      })
+    })
+  }, [])
 
   return (
     <div className='container'>
       <header>
         <h1>Lista de Presença</h1>
         <div>
-          <strong>Anna</strong>
-          <img src="https://github.com/franzannakarolina.png" alt="Foto Perfil" />
+          <strong>{user.name}</strong>
+          <img src={user.avatar} alt="Foto Perfil" />
         </div>
       </header>
       <input 
