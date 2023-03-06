@@ -8,7 +8,8 @@ export function Home () {
     <input type="text" placeholder="Digite o seu nome..." />
     <button type="button">Adicionar</button>
 
-    <Card />
+    <Card name="Rodrigo" time="10:55:25" />
+    <Card name="João" time="11:00:25" />
     </div>
   )
 }
