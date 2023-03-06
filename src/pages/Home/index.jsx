@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from '../../components/Card';
 import './styles.css';
 
@@ -15,6 +15,13 @@ export function Home () {
     }
     setStudents([...students, newStudent])
   }
+
+  useEffect(() => {
+    const studentsStorage = localStorage.getItem('students')
+    if(studentsStorage) {
+      setStudents(JSON.parse(studentsStorage))
+    }
+  }, [students, name])
 
   return (
     <div className='container'>
